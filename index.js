@@ -40,13 +40,51 @@ const adventurer = {
             }
       }
 
-      const robin = new Character("Robin");
-      robin.inventory = ["sword", "potion", "artifact"];
-      robin.companion = new Character("Leo");
-      robin.companion.type = "Cat";
-      robin.companion.companion = new Character("Frank");
-      robin.companion.companion.type = "Flea";
-      robin.companion.companion.inventory = ["small hat", "sunglasses"];
+    //   const robin = new Character("Robin");
+    //   robin.inventory = ["sword", "potion", "artifact"];
+    //   robin.companion = new Character("Leo");
+    //   robin.companion.type = "Cat";
+    //   robin.companion.companion = new Character("Frank");
+    //   robin.companion.companion.type = "Flea";
+    //   robin.companion.companion.inventory = ["small hat", "sunglasses"];
 
-      robin.companion.roll();
-      robin.companion.companion.roll();
+    //   robin.companion.roll();
+    //   robin.companion.companion.roll();
+
+      // Part three: class features
+
+      class Adventurer extends Character {
+        constructor (name, role, power, trait) {
+          super(name);
+          // Adventurers have specialized roles.
+          this.role = role;
+          this.power = power;
+          this.trait = trait;
+          this.inventory = [];
+          // Every adventurer starts with a bed and 50 gold coins.
+          this.inventory.push("bedroll", "50 gold coins");
+        }
+        // Adventurers have the ability to scout ahead of them.
+        scout () {
+          console.log(`${this.name} is scouting ahead...`);
+          super.roll(); // super calls upon parent property
+        }
+      }
+
+      class Companion extends Character {
+        constructor (name, type, trait) {
+            super(name);
+            this.type = type;
+            this.trait = trait;
+            this.inventory = [];
+        }
+      }
+
+      const robin = new Adventurer("Robin");
+      const frank = new Companion("Frank");
+      const leo = new Companion("Leo")
+
+      robin.inventory = ["sword", "potion", "artifact"];
+      leo.inventory = ["small hat", "sunglasses"];
+
+      console.log(leo.inventory)
